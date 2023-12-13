@@ -1,17 +1,23 @@
-import React from "react";
+import React, {useState} from "react";
 
 const Banner = () => {
+  const [activeButton, setActiveButton] = useState('Arrivals');
+
+  const handleButtonClick = (buttonName) => {
+    setActiveButton(buttonName === activeButton ? null : buttonName);
+  };
   return (
     <div className="bg-avion-blue flex h-40  max-w-full justify-center">
-      <div className="flex w-full max-w-screen-lg flex-col border-2 border-red-500">
+      <div className="flex w-full max-w-screen-lg flex-col ">
         <div className="h-1/2 w-1/2 items-center">
           <div className="mt-6 flex flex-row justify-between">
             <h1 className="text-4xl text-white ">FLIGHTS</h1>
-            <div className=" font-Gupter text flex w-60 flex-row items-center justify-around bg-gray-300 text-2xl text-gray-500">
-              Arrivals | Departures
+            <div className=" font-Gupter text flex w-auto p-1 rounded flex-row justify-center items-center bg-gray-300 text-2xl">
+              <button onClick={() => handleButtonClick('Arrivals')} style={{color: activeButton === 'Arrivals' ? 'white' : 'rgb(87,96,113)', backgroundColor: activeButton === 'Arrivals' ? 'rgb(55, 98, 182)' : 'transparent', padding: '2px', borderRadius: '5px'}}>Arrivals</button>
+              <button onClick={() => handleButtonClick('Departures')} style={{color: activeButton === 'Departures' ? 'white' : 'rgb(87,96,113)', backgroundColor: activeButton === 'Departures' ? 'rgb(55, 98, 182)' : 'transparent', padding: '2px', borderRadius: '5px'}}>Departures</button>
             </div>
-            <div className="text-white">
-              <span class="material-icons text-white">refresh</span>Refresh
+            <div className="text-white flex items-center">
+              <button className="text-center flex"><span class="material-icons text-white">refresh</span>Refresh</button>
             </div>
           </div>
         </div>

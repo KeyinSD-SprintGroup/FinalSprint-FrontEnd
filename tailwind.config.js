@@ -12,8 +12,8 @@ module.exports = {
       fontFamily: {
         Koulen: ["Koulen", "cursive"],
         Gupter: ["Gupter", "serif"],
-        "Loved by the King": ['"Loved by the King"', "cursive"],
-        "Material Icons": ['"Material Icons"', "normal"],
+        "LovedbytheKing": ['"Loved by the King"', "cursive"],
+        "MaterialIcons": ['"Material Icons"', "normal"],
       },
     },
   },
