@@ -4,10 +4,10 @@ import { SocialIcon } from "react-social-icons";
 const Footer = () => {
   return (
     <div
-      className="relative flex flex-wrap justify-between bg-avion-blue text-white"
-      style={{ paddingLeft: "50px", marginTop: "30px", paddingTop: "30px" }}
+      className="relative flex flex-wrap justify-center bg-avion-blue text-white"
+      style={{marginTop: "30px", paddingTop: "30px" }}
     >
-      <div className="w-1/2 pr-16">
+      <div className="w-1/3">
         <h1 className="font-Koulen text-4xl">QUICK LINKS</h1>
         <div className="flex flex-col">
           <a
@@ -61,7 +61,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="w-1/2 pr-16 text-right">
+      <div className="w-1/3 text-right">
         <h1 className="font-Koulen text-4xl">CONTACT</h1>
         <h2 className="text-1xl font-Gupter text-opacity-70">Flight Hub</h2>
         <p className="text-1xl font-Gupter text-opacity-70">
