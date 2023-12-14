@@ -3,7 +3,8 @@ import Banner from "./components/Banner";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Splash from "./components/Splash";
-import Admin from "./components/Admin";
+import FlightViewButtons from "./components/FlightViewButtons";
+// import Admin from "./components/Admin";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Splash />
       {/* <Admin /> */}
       <Banner />
+      <FlightViewButtons />
       <Footer />
     </div>
   );
