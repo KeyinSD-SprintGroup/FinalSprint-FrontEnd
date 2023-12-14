@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <div
       className="relative flex flex-wrap justify-center bg-avion-blue text-white"
-      style={{marginTop: "30px", paddingTop: "30px" }}
+      style={{ marginTop: "30px", paddingTop: "30px" }}
     >
       <div className="w-1/3">
         <h1 className="font-Koulen text-4xl">QUICK LINKS</h1>
