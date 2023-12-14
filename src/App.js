@@ -12,6 +12,7 @@ function App() {
       <Header />
       <Splash />
       {/* <Admin /> */}
+      {/* <Login /> */}
       <Banner />
       <FlightViewButtons />
       <Footer />
