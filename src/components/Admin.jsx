@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Admin = () => {
+    const [activeButton, setActiveButton] = useState('Flight');
+    const [activeEntity, setActiveEntity] = useState('Flight')
+
+    const switchEntity = (entity) => {
+        setActiveEntity(entity);
+        setActiveButton(entity === activeButton ? null : entity);
+    }
 
   return (
     <div>
@@ -10,116 +17,117 @@ const Admin = () => {
             <div className="mt-6 flex flex-row justify-between">
                 <h1 className="text-4xl text-white ">Admin</h1>
             </div>
-            <div className="font-Gupter flex">
-                <button className="bg-gray-700 text-white m-2 p-2 w-48 rounded border border-black/50">Add Flight</button>
-                <button className="bg-white/50 text-white m-2 p-2 w-48 rounded border border-black/50">Add Aircraft</button>
-                <button className="bg-white/50 text-white m-2 p-2 w-48 rounded border border-black/50">Add Passenger</button>
+            <div className="font-Gupter flex mt-5">
+                <button onClick={() => switchEntity('Flight')} style={{backgroundColor: activeButton === 'Flight' ? 'rgb(55, 65, 81)' : 'rgba(255, 255, 255, 0.5)'}} className="text-white m-2 p-2 w-48 rounded border border-black/50">Add Flight</button>
+                <button onClick={() => switchEntity('Aircraft')} style={{backgroundColor: activeButton === 'Aircraft' ? 'rgb(55, 65, 81)' : 'rgba(255, 255, 255, 0.5)'}} className="bg-white/50 text-white m-2 p-2 w-48 rounded border border-black/50">Add Aircraft</button>
+                <button onClick={() => switchEntity('Passenger')} style={{backgroundColor: activeButton === 'Passenger' ? 'rgb(55, 65, 81)' : 'rgba(255, 255, 255, 0.5)'}} className="bg-white/50 text-white m-2 p-2 w-48 rounded border border-black/50">Add Passenger</button>
                 </div>
             </div>
         </div>
         </div>
-        {/* <div className="font-Gupter flex justify-center">
-        <div className="bg-gray-300 flex w-full max-w-screen-lg flex-col mt-6 mb-6 rounded">
-            <div className="h-1/2 w-1/2 items-center pl-5">
-                <div className="mt-6 flex flex-row justify-between">
-                    <h1 className="text-4xl text-gray-700">Add Flight</h1>
-                    </div>
-                    <div className="p-5">
-                        <div className="flex p-2">
-                            <h2 className="mr-16">Scheduled:</h2>
-                            <input></input>
-                        </div>
-                        <div className="flex p-2">
-                            <h2 className="mr-8">Flight Number:</h2>
-                            <input></input>
-                        </div>
-                        <div className="flex p-2">
-                            <h2 className="mr-20">Airline:</h2>
-                            <input className="ml-2"></input>
-                        </div>
-                        <div className="flex p-2">
-                            <h2 className="mr-28">To:</h2>
-                            <input className="ml-2"></input>
-                        </div>
-                        <div className="flex p-2">
-                            <h2 className="mr-24">From:</h2>
-                            <input className="ml-1"></input>
-                        </div>
-                        <div className="flex p-2">
-                            <h2 className="mr-20">Status:</h2>
-                            <input className="ml-3.5"></input>
-                        </div>
-                        <div className="flex p-2">
-                            <h2 className="mr-16">Terminal:</h2>
-                            <input className="ml-3"></input>
-                        </div>
-                        <div className="flex p-2">
-                            <h2 className="mr-24">Gate:</h2>
-                            <input className="ml-3"></input>
-                        </div>
-                        <div className="flex p-2">
-                            <h2 className="mr-4">Check In Counter:</h2>
-                            <input className="ml-1"></input>
-                        </div>
-                        <div className="flex p-2">
-                            <h2 className="mr-20">Carousel:</h2>
-                            <input></input>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> */}
-        {/* <div className="font-Gupter flex justify-center">
-        <div className="bg-gray-300 flex w-full max-w-screen-lg flex-col mt-6 mb-6 rounded">
-            <div className="h-1/2 w-1/2 items-center pl-5">
-                <div className="mt-6 flex flex-row justify-between">
-                    <h1 className="text-4xl text-gray-700">Add Aircraft</h1>
-                    </div>
-                    <div className="p-5">
-                        <div className="flex p-2">
-                            <h2 className="mr-28">Type:</h2>
-                            <input className="ml-3"></input>
-                        </div>
-                        <div className="flex p-2">
-                            <h2 className="mr-16">Tail Number:</h2>
-                            <input className="ml-2"></input>
-                        </div>
-                        <div className="flex p-2">
-                            <h2 className="mr-16">Airline Name:</h2>
-                            <input className="ml-1"></input>
-                        </div>
-                        <div className="flex p-2">
-                            <h2 className="mr-2">Number of Passengers:</h2>
-                            <input></input>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> */}
         <div className="font-Gupter flex justify-center">
-        <div className="bg-gray-300 flex w-full max-w-screen-lg flex-col mt-6 mb-6 rounded">
-            <div className="h-1/2 w-1/2 items-center pl-5">
-                <div className="mt-6 flex flex-row justify-between">
-                    <h1 className="text-4xl text-gray-700">Add Passenger</h1>
+            <div className="bg-gray-300 flex w-full max-w-screen-lg flex-col mt-6 mb-6 rounded">
+            {activeEntity === 'Flight' && (
+                <div className="h-1/2 w-1/2 items-center pl-5">
+                    <div className="mt-6 flex flex-row justify-between">
+                        <h1 className="text-4xl text-gray-700">Add Flight</h1>
+                        </div>
+                        <div className="p-5">
+                            <div className="flex p-2">
+                                <h2 className="w-2/5">Scheduled:</h2>
+                                <input></input>
+                            </div>
+                            <div className="flex p-2">
+                                <h2 className="w-2/5">Flight Number:</h2>
+                                <input></input>
+                            </div>
+                            <div className="flex p-2">
+                                <h2 className="w-2/5">Airline:</h2>
+                                <input></input>
+                            </div>
+                            <div className="flex p-2">
+                                <h2 className="w-2/5">To:</h2>
+                                <input></input>
+                            </div>
+                            <div className="flex p-2">
+                                <h2 className="w-2/5">From:</h2>
+                                <input></input>
+                            </div>
+                            <div className="flex p-2">
+                                <h2 className="w-2/5">Status:</h2>
+                                <input></input>
+                            </div>
+                            <div className="flex p-2">
+                                <h2 className="w-2/5">Terminal:</h2>
+                                <input></input>
+                            </div>
+                            <div className="flex p-2">
+                                <h2 className="w-2/5">Gate:</h2>
+                                <input></input>
+                            </div>
+                            <div className="flex p-2">
+                                <h2 className="w-2/5">Check In Counter:</h2>
+                                <input></input>
+                            </div>
+                            <div className="flex p-2">
+                                <h2 className="w-2/5">Carousel:</h2>
+                                <input></input>
+                            </div>
+                        </div>
+                        <div><button className="bg-avion-blue text-white m-2 mb-8 p-2 w-48 rounded border border-black/50">Submit</button></div>
                     </div>
-                    <div className="p-5">
-                        <div className="flex p-2">
-                            <h2 className="mr-10">First Name:</h2>
-                            <input className=""></input>
+            )}
+            {activeEntity === 'Aircraft' && (
+                    <div className="h-1/2 w-1/2 items-center pl-5">
+                        <div className="mt-6 flex flex-row justify-between">
+                            <h1 className="text-4xl text-gray-700">Add Aircraft</h1>
+                            </div>
+                            <div className="p-5">
+                                <div className="flex p-2">
+                                    <h2 className="w-2/5">Type:</h2>
+                                    <input></input>
+                                </div>
+                                <div className="flex p-2">
+                                    <h2 className="w-2/5">Tail Number:</h2>
+                                    <input></input>
+                                </div>
+                                <div className="flex p-2">
+                                    <h2 className="w-2/5">Airline Name:</h2>
+                                    <input></input>
+                                </div>
+                                <div className="flex p-2">
+                                    <h2 className="w-2/5">Number of Passengers:</h2>
+                                    <input></input>
+                                </div>
+                            </div>
+                            <div><button className="bg-avion-blue text-white m-2 mb-8 p-2 w-48 rounded border border-black/50">Submit</button></div>
                         </div>
-                        <div className="flex p-2">
-                            <h2 className="mr-10">Last Name:</h2>
-                            <input className="ml-1"></input>
+            )}
+            {activeEntity === 'Passenger' && (
+                    <div className="h-1/2 w-1/2 items-center pl-5">
+                        <div className="mt-6 flex flex-row justify-between">
+                            <h1 className="text-4xl text-gray-700">Add Passenger</h1>
+                            </div>
+                            <div className="p-5">
+                                <div className="flex p-2">
+                                    <h2 className="w-2/5">First Name:</h2>
+                                    <input></input>
+                                </div>
+                                <div className="flex p-2">
+                                    <h2 className="w-2/5">Last Name:</h2>
+                                    <input></input>
+                                </div>
+                                <div className="flex p-2">
+                                    <h2 className="w-2/5">Phone Number:</h2>
+                                    <input></input>
+                                </div>
+                            </div>
+                            <div><button className="bg-avion-blue text-white m-2 mb-8 p-2 w-48 rounded border border-black/50">Submit</button></div>
                         </div>
-                        <div className="flex p-2">
-                            <h2 className="mr-4">Phone Number:</h2>
-                            <input></input>
-                        </div>
-                    </div>
-                </div>
+            )}
             </div>
         </div>
-        </div>
+    </div>
   );
 };
 

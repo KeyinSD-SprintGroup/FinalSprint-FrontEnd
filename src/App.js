@@ -7,8 +7,8 @@ function App() {
   return (
     <div className="font-Koulen h-screen tracking-wider">
       <Header />
-      {/* <Splash /> */}
-      <Admin />
+      <Splash />
+      {/* <Admin /> */}
       <Banner />
     </div>
   );
