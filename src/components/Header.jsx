@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import RowHouse from "../assets/row_house.png";
+import React, {useState} from "react";
+import FlightIcon from "../assets/FLIGHT HUB (1).png"
 
 const Header = () => {
   const [activeButton, setActiveButton] = useState("HOME");
@@ -12,12 +12,13 @@ const Header = () => {
     <div className="flex h-40 max-w-full  justify-center bg-avion-blue">
       <div className="flex w-full max-w-7xl ">
         <div className="flex w-1/2 flex-row items-center">
-          <img className="ml-6 h-28" src={RowHouse} alt="row houses" />
+          <img className="ml-6 h-28" src={FlightIcon} alt="flight icon" />
 
           <div className=" ml-2 flex flex-col justify-center text-white">
-            <h1 className="font-Koulen text-4xl">ST. JOHN&apos;S</h1>
-            <h2 className="text-1xl font-Gupter text-opacity-70">
-              International Airport Authority
+            <h1 className="font-Koulen text-4xl">Flight Hub</h1>
+            <h2 className="font-Gupter text-sm text-opacity-70">
+              Your one stop shop to seamless air travel
+
             </h2>
           </div>
         </div>
@@ -33,18 +34,6 @@ const Header = () => {
               }}
             >
               HOME
-            </button>
-            <li>|</li>
-            <button
-              onClick={() => handleButtonClick("AMENITIES")}
-              style={{
-                color:
-                  activeButton === "AMENITIES"
-                    ? "white"
-                    : "rgba(255, 255, 255, 0.63)",
-              }}
-            >
-              AMENITIES
             </button>
             <li>|</li>
             <button
