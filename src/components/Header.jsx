@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import FlightIcon from "../assets/FLIGHT HUB (1).png";
+import React, {useState} from "react";
+import FlightIcon from "../assets/FLIGHT HUB (1).png"
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [activeButton, setActiveButton] = useState("HOME");
@@ -23,6 +24,7 @@ const Header = () => {
         </div>
         <div className="w-1/2">
           <ul className="flex h-full w-full flex-row items-center justify-around text-3xl text-white text-opacity-70">
+            <Link to="/">
             <button
               onClick={() => handleButtonClick("HOME")}
               style={{
@@ -34,7 +36,9 @@ const Header = () => {
             >
               HOME
             </button>
+            </Link>
             <li>|</li>
+            <Link to="/flights">
             <button
               onClick={() => handleButtonClick("FLIGHTS")}
               style={{
@@ -46,7 +50,9 @@ const Header = () => {
             >
               FLIGHTS
             </button>
+            </Link>
             <li>|</li>
+            <Link to="/admin">
             <button
               onClick={() => handleButtonClick("ADMIN")}
               style={{
@@ -58,7 +64,9 @@ const Header = () => {
             >
               ADMIN
             </button>
+            </Link>
             <li>|</li>
+            <Link to="/contact">
             <button
               onClick={() => handleButtonClick("CONTACT")}
               style={{
@@ -70,6 +78,7 @@ const Header = () => {
             >
               LOGIN
             </button>
+            </Link>
             <button
               onClick={() => handleButtonClick("LOGIN")}
               style={{
