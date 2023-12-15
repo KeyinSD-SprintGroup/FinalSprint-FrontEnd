@@ -76,9 +76,11 @@ const Header = () => {
                     : "rgba(255, 255, 255, 0.63)",
               }}
             >
-              LOGIN
+              Contact
             </button>
             </Link>
+            <li>|</li>
+            <Link to="/login">
             <button
               onClick={() => handleButtonClick("LOGIN")}
               style={{
@@ -87,7 +89,10 @@ const Header = () => {
                     ? "white"
                     : "rgba(255, 255, 255, 0.63)",
               }}
-            ></button>
+            >
+              Login
+            </button>
+            </Link>
           </ul>
         </div>
       </div>
