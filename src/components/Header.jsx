@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import FlightIcon from "../assets/FLIGHT HUB (1).png"
+import FlightIcon from "../assets/FLIGHT HUB.png"
 import { Link } from "react-router-dom";
 
 const Header = () => {
