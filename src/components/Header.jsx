@@ -19,7 +19,6 @@ const Header = () => {
             <h1 className="font-Koulen text-4xl">Flight Hub</h1>
             <h2 className="font-Gupter text-sm text-opacity-70">
               Your one stop shop to seamless air travel
-
             </h2>
           </div>
         </div>
@@ -77,9 +76,18 @@ const Header = () => {
                     : "rgba(255, 255, 255, 0.63)",
               }}
             >
-              CONTACT
+              LOGIN
             </button>
             </Link>
+            <button
+              onClick={() => handleButtonClick("LOGIN")}
+              style={{
+                color:
+                  activeButton === "LOGIN"
+                    ? "white"
+                    : "rgba(255, 255, 255, 0.63)",
+              }}
+            ></button>
           </ul>
         </div>
       </div>
