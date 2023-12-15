@@ -8,6 +8,7 @@ import Splash from "./components/Splash";
 import Admin from "./components/Admin";
 import Contact from "./components/Contact";
 import ArrivalTable from "./components/ArrivalTable";
+import Login from "./components/Login";
 
 const flights = [
   {
@@ -124,6 +125,7 @@ function App() {
           <Route path="/flights" element={<Banner />}></Route>
           <Route path="/admin" element={<Admin />}></Route>
           <Route path="/contact" element={<Contact />}></Route>
+          <Route path="/login" element={<Login />}></Route>
         </Routes>
         <Footer />
       </div>
