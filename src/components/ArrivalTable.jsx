@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const ArrivalTable = ({ flights }) => {
   return (
-    <table className="w-full max-w-screen-lg table-fixed border-2 border-red-500 text-center">
+    <table className="w-full max-w-screen-lg table-fixed border-2 text-center">
       <thead className="border-y-14 border-avion-blue bg-avion-blue font-Gupter text-2xl text-white text-opacity-70">
         <tr>
           <th className="border-r border-white">Airline</th>
