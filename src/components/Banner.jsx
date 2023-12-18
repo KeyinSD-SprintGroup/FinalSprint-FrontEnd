@@ -4,15 +4,18 @@ import { Menu } from '@headlessui/react';
 import { Fragment } from 'react'
 
 import ChevronDown from "../assets/icons/chevron-down.svg";
+import ArrivalTable from "./ArrivalTable";
 
-const Banner = ({ airportData }) => {
+const Banner = ({ airportData, onButtonClick }) => {
   const [activeButton, setActiveButton] = useState("Arrivals");
 
   const handleButtonClick = (buttonName) => {
     setActiveButton(buttonName === activeButton ? null : buttonName);
+    onButtonClick(buttonName);
   };
 
   return (
+    <>
     <div className="flex h-24 max-w-full  justify-center bg-avion-blue">
       <div className="flex w-full max-w-screen-lg flex-col ">
         <div className="h-1/2 items-center">
@@ -20,6 +23,7 @@ const Banner = ({ airportData }) => {
             <div><h1 className="text-4xl text-white ">FLIGHTS</h1></div>
             <div className=" text flex w-auto flex-row items-center justify-center rounded bg-gray-300 p-1 font-Gupter text-2xl">
               <button
+                name="arrivalsToggle"
                 onClick={() => handleButtonClick("Arrivals")}
                 style={{
                   color:
@@ -103,11 +107,14 @@ const Banner = ({ airportData }) => {
         </div>
       </div>
     </div>
+    <ArrivalTable />
+    </>
   );
 };
 
 Banner.propTypes = {
   airportData: PropTypes.array.isRequired,
+  onButtonClick: PropTypes.func.isRequired,
 };
 
 export default Banner;

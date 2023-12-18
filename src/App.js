@@ -1,19 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import PropTypes from "prop-types";
 
+import Home from "./components/Home";
 import Banner from "./components/Banner";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import Splash from "./components/Splash";
 import Admin from "./components/Admin";
 import Contact from "./components/Contact";
-import ArrivalTable from "./components/ArrivalTable";
 import Login from "./components/Login";
 
-function Home( ) {
+function App() {
+  const [clickedButton, setClickedButton] = useState(null);
+
+  const handleButtonClick = (buttonName) => {
+    setClickedButton(buttonName);
+    console.log(`Button clicked: ${buttonName}`);
+  }
+
   const [flightData, setFlightData] = useState([]);
-  const isArrival = true; // Change to false for departures
+  const isArrival = clickedButton === 'Arrivals';
+  // const isArrival = true; // Change to false for departures
   const airportName = "St.%20John%27s%20International%20Airport";
   console.log(airportName)
 
@@ -42,18 +48,7 @@ function Home( ) {
 
     fetchFlightData();
   }, [isArrival, airportName]);
-  return (
-    <>
-      <Splash />
-      <Banner />
-      <div className="flex w-full justify-center">
-        <ArrivalTable flightData={flightData} />
-      </div>
-    </>
-  )
-}
 
-function App() {
   const [airportData, setAirportData] = useState([]);
 
   useEffect(() => {
@@ -75,13 +70,15 @@ function App() {
 
     fetchAirportData();
   }, []);
+
+
   return (
     <Router>
       <div className="h-screen font-Koulen tracking-wider">
         <Header />
         <Routes>
-          <Route path="/" element={<Home airportData={airportData}/>}></Route>
-          <Route path="/flights" element={<Banner airportData={airportData}/>}></Route>
+          <Route path="/" element={<Home flightData={flightData} airportData={airportData} clickedButton={clickedButton}/>}></Route>
+          <Route path="/flights" element={<Banner airportData={airportData} onButtonClick={handleButtonClick}/>}></Route>
           <Route path="/admin" element={<Admin />}></Route>
           <Route path="/contact" element={<Contact />}></Route>
           <Route path="/login" element={<Login />}></Route>
@@ -91,9 +88,5 @@ function App() {
     </Router>
   );
 }
-
-Home.propTypes = {
-  airportData: PropTypes.array.isRequired,
-};
 
 export default App;
