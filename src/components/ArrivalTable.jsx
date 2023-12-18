@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const ArrivalTable = ({ flights }) => {
+const ArrivalTable = ({ flightData }) => {
   return (
-    <table className="w-full max-w-screen-lg table-fixed border-2 text-center">
+    <table className="w-full max-w-screen-lg table-fixed border-2 border-red-500 text-center">
       <thead className="border-y-14 border-avion-blue bg-avion-blue font-Gupter text-2xl text-white text-opacity-70">
         <tr>
           <th className="border-r border-white">Airline</th>
@@ -15,9 +15,17 @@ const ArrivalTable = ({ flights }) => {
         </tr>
       </thead>
       <tbody className="">
-        {flights.length > 0 ? (
-          flights.map((flight, index) => {
+        {flightData.length > 0 ? (
+          flightData.map((flight, index) => {
             console.log(flight);
+
+            const arrivalDateObject = new Date(flight.arrivalDateAndTime);
+            console.log(arrivalDateObject);
+            const arrivalDate = arrivalDateObject.toLocaleDateString();
+            console.log(arrivalDate);
+            const arrivalTime = arrivalDateObject.toLocaleTimeString();
+            console.log(arrivalTime);
+
             return (
               <tr
                 key={index}
@@ -25,11 +33,11 @@ const ArrivalTable = ({ flights }) => {
                   index % 2 === 0 ? "bg-gray-200" : "bg-white"
                 } font-Gupter`}
               >
-                <td>{flight.airline}</td>
+                <td>{flight.airlineName}</td>
                 <td>{flight.flightNumber}</td>
-                <td>{flight.arrivalDate}</td>
-                <td>{flight.arrivalTime}</td>
-                <td>{flight.from}</td>
+                <td>{arrivalDate}</td>
+                <td>{arrivalTime}</td>
+                <td>{flight.departureAirportName}</td>
                 <td>{flight.status}</td>
               </tr>
             );
@@ -45,7 +53,7 @@ const ArrivalTable = ({ flights }) => {
 };
 
 ArrivalTable.propTypes = {
-  flights: PropTypes.array.isRequired,
+  flightData: PropTypes.array.isRequired,
 };
 
 export default ArrivalTable;

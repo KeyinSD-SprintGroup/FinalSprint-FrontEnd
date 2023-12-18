@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Banner from "./components/Banner";
-// import Footer from "./components/Footer";
+import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Splash from "./components/Splash";
 import Admin from "./components/Admin";
@@ -12,12 +12,33 @@ import Login from "./components/Login";
 
 
 function Home() {
+  const [flightData, setFlightData] = useState([]);
+
+  useEffect(() => {
+    const fetchFlightData = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:8080/arrival_flight_view?arrivalAirportName=St.%20John%27s%20International%20Airport`,
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch flight data");
+        }
+        const data = await response.json();
+        console.log(data);
+        setFlightData(data);
+      } catch (error) {
+        console.error("Error fetching flight data:", error.message);
+      }
+    };
+
+    fetchFlightData();
+  }, []);
   return (
     <>
       <Splash />
       <Banner />
       <div className="flex w-full justify-center">
-        <ArrivalTable />
+        <ArrivalTable flightData={flightData} />
       </div>
     </>
   )
@@ -37,7 +58,7 @@ function App() {
         }
         const data = await response.json();
         console.log(data);
-        setAirportData(data);
+        setAirportData(data._embedded?.airport || []);
       } catch (error) {
         console.error("Error fetching airport data:", error.message);
       }
@@ -56,7 +77,7 @@ function App() {
           <Route path="/contact" element={<Contact />}></Route>
           <Route path="/login" element={<Login />}></Route>
         </Routes>
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </Router>
   );
