@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import Banner from "./components/Banner";
 import Footer from "./components/Footer";
@@ -10,19 +11,27 @@ import Contact from "./components/Contact";
 import ArrivalTable from "./components/ArrivalTable";
 import Login from "./components/Login";
 
-
-function Home() {
+function Home( ) {
   const [flightData, setFlightData] = useState([]);
+  const isArrival = true; // Change to false for departures
+  const airportName = "St.%20John%27s%20International%20Airport";
+  console.log(airportName)
 
   useEffect(() => {
     const fetchFlightData = async () => {
       try {
+        const endpoint = isArrival
+          ? "arrival_flight_view"
+          : "departure_flight_view";
+
         const response = await fetch(
-          `http://localhost:8080/arrival_flight_view?arrivalAirportName=St.%20John%27s%20International%20Airport`,
+          `http://localhost:8080/${endpoint}?${isArrival ? 'arrival' : 'departure'}AirportName=${airportName}`
         );
+
         if (!response.ok) {
           throw new Error("Failed to fetch flight data");
         }
+
         const data = await response.json();
         console.log(data);
         setFlightData(data);
@@ -32,7 +41,7 @@ function Home() {
     };
 
     fetchFlightData();
-  }, []);
+  }, [isArrival, airportName]);
   return (
     <>
       <Splash />
@@ -71,7 +80,7 @@ function App() {
       <div className="h-screen font-Koulen tracking-wider">
         <Header />
         <Routes>
-          <Route path="/" element={<Home />}></Route>
+          <Route path="/" element={<Home airportData={airportData}/>}></Route>
           <Route path="/flights" element={<Banner airportData={airportData}/>}></Route>
           <Route path="/admin" element={<Admin />}></Route>
           <Route path="/contact" element={<Contact />}></Route>
@@ -82,5 +91,9 @@ function App() {
     </Router>
   );
 }
+
+Home.propTypes = {
+  airportData: PropTypes.array.isRequired,
+};
 
 export default App;

@@ -17,14 +17,14 @@ const ArrivalTable = ({ flightData }) => {
       <tbody className="">
         {flightData.length > 0 ? (
           flightData.map((flight, index) => {
-            console.log(flight);
+            // console.log(flight);
 
             const arrivalDateObject = new Date(flight.arrivalDateAndTime);
-            console.log(arrivalDateObject);
+            // console.log(arrivalDateObject);
             const arrivalDate = arrivalDateObject.toLocaleDateString();
-            console.log(arrivalDate);
+            // console.log(arrivalDate);
             const arrivalTime = arrivalDateObject.toLocaleTimeString();
-            console.log(arrivalTime);
+            // console.log(arrivalTime);
 
             return (
               <tr
