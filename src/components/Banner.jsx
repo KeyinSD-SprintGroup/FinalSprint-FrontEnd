@@ -5,11 +5,12 @@ import { Fragment } from 'react'
 
 import ChevronDown from "../assets/icons/chevron-down.svg";
 
-const Banner = ({ airportData }) => {
+const Banner = ({ airportData, onButtonClick }) => {
   const [activeButton, setActiveButton] = useState("Arrivals");
 
   const handleButtonClick = (buttonName) => {
     setActiveButton(buttonName === activeButton ? null : buttonName);
+    onButtonClick(buttonName);
   };
 
   return (
@@ -108,6 +109,7 @@ const Banner = ({ airportData }) => {
 
 Banner.propTypes = {
   airportData: PropTypes.array.isRequired,
+  onButtonClick: PropTypes.func.isRequired,
 };
 
 export default Banner;
