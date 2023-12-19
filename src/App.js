@@ -14,18 +14,16 @@ function App() {
   const [buttonName, setButtonName] = useState(null);
 
   const handleButtonName = (data) => {
-    console.log('Data recieved: ', data);
+    console.log("Data recieved: ", data);
     setButtonName(data);
-  }
+  };
 
   const [airportData, setAirportData] = useState([]);
 
   useEffect(() => {
     const fetchAirportData = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:8080/airport`,
-        );
+        const response = await fetch(`http://localhost:8080/airport`);
         if (!response.ok) {
           throw new Error("Failed to fetch Airport data");
         }
@@ -41,10 +39,12 @@ function App() {
   }, []);
 
   const [flightData, setFlightData] = useState([]);
-  const isArrival = buttonName === 'Arrivals';
+  const isArrival = buttonName === "Arrivals";
   // const isArrival = true; // Change to false for departures
-  const airportName = "St.%20John%27s%20International%20Airport";
-  console.log(airportName)
+  const [airportName, setAirportName] = useState(
+    "St. John's International Airport",
+  );
+  console.log(airportName);
 
   useEffect(() => {
     const fetchFlightData = async () => {
@@ -54,7 +54,9 @@ function App() {
           : "departure_flight_view";
 
         const response = await fetch(
-          `http://localhost:8080/${endpoint}?${isArrival ? 'arrival' : 'departure'}AirportName=${airportName}`
+          `http://localhost:8080/${endpoint}?${
+            isArrival ? "arrival" : "departure"
+          }AirportName=${encodeURIComponent(airportName)}`,
         );
 
         if (!response.ok) {
@@ -77,8 +79,30 @@ function App() {
       <div className="h-screen font-Koulen tracking-wider">
         <Header />
         <Routes>
-          <Route path="/" element={<Home  flightData={flightData} airportData={airportData} sendDataToParent={handleButtonName}/>}></Route>
-          <Route path="/flights" element={<Flights  flightData={flightData} airportData={airportData} sendDataToParent={handleButtonName}/>}></Route>
+          <Route
+            path="/"
+            element={
+              <Home
+                setAirportName={setAirportName}
+                airportName={airportName}
+                flightData={flightData}
+                airportData={airportData}
+                sendDataToParent={handleButtonName}
+              />
+            }
+          ></Route>
+          <Route
+            path="/flights"
+            element={
+              <Flights
+                flightData={flightData}
+                airportData={airportData}
+                sendDataToParent={handleButtonName}
+                airportName={airportName}
+                setAirportName={setAirportName}
+              />
+            }
+          ></Route>
           <Route path="/admin" element={<Admin />}></Route>
           <Route path="/contact" element={<Contact />}></Route>
           <Route path="/login" element={<Login />}></Route>
