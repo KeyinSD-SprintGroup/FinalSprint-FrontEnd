@@ -1,16 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const ArrivalTable = ({ flightData }) => {
+const ArrivalTable = ({ flightData, buttonName }) => {
+  const direction = buttonName === "Arrivals" ? "From" : "To";
   return (
-    <table className="w-full max-w-screen-lg table-fixed border-2 border-red-500 text-center">
+    <table className="w-full max-w-screen-lg table-fixed text-center">
       <thead className="border-y-14 border-avion-blue bg-avion-blue font-Gupter text-2xl text-white text-opacity-70">
         <tr>
           <th className="border-r border-white">Airline</th>
           <th className="border-r border-white">Flight Number</th>
           <th className="border-r border-white">Date</th>
           <th className="border-r border-white">Time</th>
-          <th className="border-r border-white">From</th>
+          <th className="border-r border-white">{direction}</th>
           <th className="">Status</th>
         </tr>
       </thead>
@@ -19,11 +20,15 @@ const ArrivalTable = ({ flightData }) => {
           flightData.map((flight, index) => {
             // console.log(flight);
 
-            const arrivalDateObject = new Date(flight.arrivalDateAndTime);
+            const dateObject = new Date(
+              buttonName === "Arrivals"
+                ? flight.arrivalDateAndTime
+                : flight.departureDateAndTime,
+            );
             // console.log(arrivalDateObject);
-            const arrivalDate = arrivalDateObject.toLocaleDateString();
+            const date = dateObject.toLocaleDateString();
             // console.log(arrivalDate);
-            const arrivalTime = arrivalDateObject.toLocaleTimeString();
+            const time = dateObject.toLocaleTimeString();
             // console.log(arrivalTime);
 
             return (
@@ -35,9 +40,13 @@ const ArrivalTable = ({ flightData }) => {
               >
                 <td>{flight.airlineName}</td>
                 <td>{flight.flightNumber}</td>
-                <td>{arrivalDate}</td>
-                <td>{arrivalTime}</td>
-                <td>{flight.departureAirportName}</td>
+                <td>{date}</td>
+                <td>{time}</td>
+                <td>
+                  {buttonName === "Arrivals"
+                    ? flight.departureAirportName
+                    : flight.arrivalAirportName}
+                </td>
                 <td>{flight.status}</td>
               </tr>
             );
@@ -54,6 +63,7 @@ const ArrivalTable = ({ flightData }) => {
 
 ArrivalTable.propTypes = {
   flightData: PropTypes.array.isRequired,
+  buttonName: PropTypes.string.isRequired,
 };
 
 export default ArrivalTable;

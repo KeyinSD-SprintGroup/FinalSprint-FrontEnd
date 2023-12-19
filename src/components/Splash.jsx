@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ChristmasPhoto from "../assets/a_background_of_a_christmas_scene_with_a_christm.jpg";
-import NewfoundlandPhoto from "../assets/erik-mclean-oc7I7D3bjw0-unsplash.jpg";
+import NewfoundlandPhoto from "../assets/erik-mclean-oc7I7D3bjw0-unsplash-resize-words.jpg";
 
 const Splash = () => {
   const [showDiv1, setShowDiv1] = useState(true);
@@ -27,9 +27,9 @@ const Splash = () => {
               alt="christmas photo"
             ></img>
           </div>
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform font-LovedbytheKing text-5xl text-white">
+          {/* <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform font-LovedbytheKing text-5xl text-white">
             Explore Newfoundland
-          </div>
+          </div> */}
         </div>
       )}
       {showDiv2 && (

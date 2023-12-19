@@ -10,6 +10,7 @@ const Home = ({
   sendDataToParent,
   setAirportName,
   airportName,
+  buttonName,
 }) => {
   const handleButtonClick = (buttonName) => {
     // setClickedButton(buttonName);
@@ -26,7 +27,7 @@ const Home = ({
         airportName={airportName}
       />
       <div className="flex w-full justify-center">
-        <ArrivalTable flightData={flightData} />
+        <ArrivalTable buttonName={buttonName} flightData={flightData} />
       </div>
     </>
   );
@@ -38,6 +39,7 @@ Home.propTypes = {
   sendDataToParent: PropTypes.func.isRequired,
   setAirportName: PropTypes.func.isRequired,
   airportName: PropTypes.string.isRequired,
+  buttonName: PropTypes.string.isRequired,
 };
 
 export default Home;

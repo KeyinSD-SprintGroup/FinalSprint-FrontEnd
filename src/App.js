@@ -11,7 +11,7 @@ import Login from "./components/Login";
 import Flights from "./components/Flights";
 
 function App() {
-  const [buttonName, setButtonName] = useState(null);
+  const [buttonName, setButtonName] = useState("Arrivals");
 
   const handleButtonName = (data) => {
     console.log("Data recieved: ", data);
@@ -88,6 +88,7 @@ function App() {
                 flightData={flightData}
                 airportData={airportData}
                 sendDataToParent={handleButtonName}
+                buttonName={buttonName}
               />
             }
           ></Route>
