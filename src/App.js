@@ -1,31 +1,29 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
-import Home from "./components/Home";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
 import Admin from "./components/Admin";
 import Contact from "./components/Contact";
-import Login from "./components/Login";
 import Flights from "./components/Flights";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import Home from "./components/Home";
+import Login from "./components/Login";
 
 function App() {
   const [buttonName, setButtonName] = useState(null);
 
   const handleButtonName = (data) => {
-    console.log('Data recieved: ', data);
+    console.log("Data recieved: ", data);
     setButtonName(data);
-  }
+  };
 
   const [airportData, setAirportData] = useState([]);
 
   useEffect(() => {
     const fetchAirportData = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:8080/airport`,
-        );
+        const response = await fetch(`http://localhost:8080/airport`);
         if (!response.ok) {
           throw new Error("Failed to fetch Airport data");
         }
@@ -41,10 +39,10 @@ function App() {
   }, []);
 
   const [flightData, setFlightData] = useState([]);
-  const isArrival = buttonName === 'Arrivals';
+  const isArrival = buttonName === "Arrivals";
   // const isArrival = true; // Change to false for departures
   const airportName = "St.%20John%27s%20International%20Airport";
-  console.log(airportName)
+  console.log(airportName);
 
   useEffect(() => {
     const fetchFlightData = async () => {
@@ -54,7 +52,9 @@ function App() {
           : "departure_flight_view";
 
         const response = await fetch(
-          `http://localhost:8080/${endpoint}?${isArrival ? 'arrival' : 'departure'}AirportName=${airportName}`
+          `http://localhost:8080/${endpoint}?${
+            isArrival ? "arrival" : "departure"
+          }AirportName=${airportName}`,
         );
 
         if (!response.ok) {
@@ -77,11 +77,30 @@ function App() {
       <div className="h-screen font-Koulen tracking-wider">
         <Header />
         <Routes>
-          <Route path="/" element={<Home  flightData={flightData} airportData={airportData} sendDataToParent={handleButtonName}/>}></Route>
-          <Route path="/flights" element={<Flights  flightData={flightData} airportData={airportData} sendDataToParent={handleButtonName}/>}></Route>
+          <Route
+            path="/"
+            element={
+              <Home
+                flightData={flightData}
+                airportData={airportData}
+                sendDataToParent={handleButtonName}
+              />
+            }
+          ></Route>
+          <Route
+            path="/flights"
+            element={
+              <Flights
+                flightData={flightData}
+                airportData={airportData}
+                sendDataToParent={handleButtonName}
+              />
+            }
+          ></Route>
           <Route path="/admin" element={<Admin />}></Route>
           <Route path="/contact" element={<Contact />}></Route>
           <Route path="/login" element={<Login />}></Route>
+          <Route path="/admin" element={<Admin />}></Route>
         </Routes>
         <Footer />
       </div>
