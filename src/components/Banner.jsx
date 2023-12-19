@@ -63,7 +63,7 @@ const Banner = ({ airportData, onButtonClick }) => {
               <Menu>
                 {({ open }) => (
                   <>
-                    <Menu.Button className="bg-blue-500 text-white py-2 px-4 rounded-md w-40 flex justify-center">
+                    <Menu.Button className="bg-blue-500 text-white py-2 px-4 rounded-md w-60 flex justify-center">
                       <div>Airports</div> 
                       <div><img src={ChevronDown}></img></div>
                     </Menu.Button>

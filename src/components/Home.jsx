@@ -1,6 +1,7 @@
 import React from "react";
 import Splash from "./Splash";
 import Banner from "./Banner";
+import FlightViewButtons from "./FlightViewButtons";
 import ArrivalTable from "./ArrivalTable";
 import PropTypes from "prop-types";
 
@@ -17,6 +18,7 @@ const Home = ( { flightData, airportData, sendDataToParent }) => {
       <div className="flex w-full justify-center">
         <ArrivalTable flightData={flightData} />
       </div>
+      <FlightViewButtons />
     </>
   );
 };
