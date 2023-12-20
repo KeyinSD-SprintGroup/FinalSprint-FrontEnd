@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
-import Home from "./components/Home";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
 import Admin from "./components/Admin";
 import Contact from "./components/Contact";
-import Login from "./components/Login";
 import Flights from "./components/Flights";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import Home from "./components/Home";
+import Login from "./components/Login";
 
 function App() {
   const [buttonName, setButtonName] = useState("Arrivals");
@@ -41,6 +41,7 @@ function App() {
   const [flightData, setFlightData] = useState([]);
   const isArrival = buttonName === "Arrivals";
   // const isArrival = true; // Change to false for departures
+
   const [airportName, setAirportName] = useState(
     "St. John's International Airport",
   );
@@ -56,6 +57,7 @@ function App() {
         const response = await fetch(
           `http://localhost:8080/${endpoint}?${
             isArrival ? "arrival" : "departure"
+
           }AirportName=${encodeURIComponent(airportName)}`,
         );
 
@@ -107,6 +109,7 @@ function App() {
           <Route path="/admin" element={<Admin />}></Route>
           <Route path="/contact" element={<Contact />}></Route>
           <Route path="/login" element={<Login />}></Route>
+          <Route path="/admin" element={<Admin />}></Route>
         </Routes>
         <Footer />
       </div>
