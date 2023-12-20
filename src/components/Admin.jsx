@@ -1,8 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 
-const Admin = () => {
+const Admin = ({ isLoggedIn }) => {
   const [activeButton, setActiveButton] = useState("Flight");
   const [activeEntity, setActiveEntity] = useState("Flight");
   const [formData, setFormData] = useState({
@@ -148,15 +149,8 @@ const Admin = () => {
   useEffect(() => {
     if (!isLoggedIn) {
       nav("/login");
-    } else {
-      setIsLoggedIn(true);
-      nav("/admin");
     }
   }, []);
-
-  if (isLoggedIn) {
-    return null;
-  }
 
   return (
     <div>
@@ -497,6 +491,10 @@ const Admin = () => {
       </div>
     </div>
   );
+};
+
+Admin.propTypes = {
+  isLoggedIn: PropTypes.bool.isRequired,
 };
 
 export default Admin;
