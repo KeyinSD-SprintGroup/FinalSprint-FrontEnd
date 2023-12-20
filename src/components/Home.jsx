@@ -4,27 +4,42 @@ import Banner from "./Banner";
 import ArrivalTable from "./ArrivalTable";
 import PropTypes from "prop-types";
 
-const Home = ( { flightData, airportData, sendDataToParent }) => {
-    const handleButtonClick = (buttonName) => {
-        // setClickedButton(buttonName);
-        sendDataToParent(buttonName);
-        console.log(`Button clicked: ${buttonName}`);
-    }
+const Home = ({
+  flightData,
+  airportData,
+  sendDataToParent,
+  setAirportName,
+  airportName,
+  buttonName,
+}) => {
+  const handleButtonClick = (buttonName) => {
+    // setClickedButton(buttonName);
+    sendDataToParent(buttonName);
+    console.log(`Button clicked: ${buttonName}`);
+  };
   return (
     <>
       <Splash />
-      <Banner airportData={airportData} onButtonClick={handleButtonClick}/>
+      <Banner
+        setAirportName={setAirportName}
+        airportData={airportData}
+        onButtonClick={handleButtonClick}
+        airportName={airportName}
+      />
       <div className="flex w-full justify-center">
-        <ArrivalTable flightData={flightData} />
+        <ArrivalTable buttonName={buttonName} flightData={flightData} />
       </div>
     </>
   );
 };
 
 Home.propTypes = {
-    flightData: PropTypes.array.isRequired,
-    airportData: PropTypes.array.isRequired,
-    sendDataToParent: PropTypes.func.isRequired,
-  };
+  flightData: PropTypes.array.isRequired,
+  airportData: PropTypes.array.isRequired,
+  sendDataToParent: PropTypes.func.isRequired,
+  setAirportName: PropTypes.func.isRequired,
+  airportName: PropTypes.string.isRequired,
+  buttonName: PropTypes.string.isRequired,
+};
 
 export default Home;

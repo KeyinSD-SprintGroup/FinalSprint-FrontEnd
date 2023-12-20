@@ -11,7 +11,7 @@ import Home from "./components/Home";
 import Login from "./components/Login";
 
 function App() {
-  const [buttonName, setButtonName] = useState(null);
+  const [buttonName, setButtonName] = useState("Arrivals");
 
   const handleButtonName = (data) => {
     console.log("Data recieved: ", data);
@@ -41,7 +41,10 @@ function App() {
   const [flightData, setFlightData] = useState([]);
   const isArrival = buttonName === "Arrivals";
   // const isArrival = true; // Change to false for departures
-  const airportName = "St.%20John%27s%20International%20Airport";
+
+  const [airportName, setAirportName] = useState(
+    "St. John's International Airport",
+  );
   console.log(airportName);
 
   useEffect(() => {
@@ -54,7 +57,8 @@ function App() {
         const response = await fetch(
           `http://localhost:8080/${endpoint}?${
             isArrival ? "arrival" : "departure"
-          }AirportName=${airportName}`,
+
+          }AirportName=${encodeURIComponent(airportName)}`,
         );
 
         if (!response.ok) {
@@ -81,9 +85,12 @@ function App() {
             path="/"
             element={
               <Home
+                setAirportName={setAirportName}
+                airportName={airportName}
                 flightData={flightData}
                 airportData={airportData}
                 sendDataToParent={handleButtonName}
+                buttonName={buttonName}
               />
             }
           ></Route>
@@ -94,6 +101,8 @@ function App() {
                 flightData={flightData}
                 airportData={airportData}
                 sendDataToParent={handleButtonName}
+                airportName={airportName}
+                setAirportName={setAirportName}
               />
             }
           ></Route>
