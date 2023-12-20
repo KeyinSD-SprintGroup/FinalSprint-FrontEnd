@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
-const Login = ({ setIsLoggedIn, isLoggedIn }) => {
+const Login = ({ setLoggedIn, loggedIn }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  // const [auth, setAuth] = useState(false);
   const nav = useNavigate();
 
   const correctUsername = "admin";
@@ -20,16 +19,16 @@ const Login = ({ setIsLoggedIn, isLoggedIn }) => {
       alert("Passwords do not match records.");
       return;
     }
-    localStorage.setItem("isLoggedIn", "true");
-    setIsLoggedIn(true);
-    nav("/admin");
+    localStorage.setItem("loggedIn", "true");
+    setLoggedIn(true);
+    nav("/");
   };
 
   useEffect(() => {
-    if (localStorage.getItem("isLoggedIn") === "true") {
+    if (localStorage.getItem("loggedIn") === "true") {
       console.log(`Welcome back, ${correctUsername}!`);
     }
-  }, [isLoggedIn]);
+  }, [loggedIn]);
 
   return (
     <div>
@@ -75,7 +74,7 @@ const Login = ({ setIsLoggedIn, isLoggedIn }) => {
 };
 
 Login.propTypes = {
-  setIsLoggedIn: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired,
+  setLoggedIn: PropTypes.bool.isRequired,
+  loggedIn: PropTypes.bool.isRequired,
 };
 export default Login;

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
-const Admin = ({ isLoggedIn }) => {
+const Admin = ({ loggedIn }) => {
   const [activeButton, setActiveButton] = useState("Flight");
   const [activeEntity, setActiveEntity] = useState("Flight");
   const [formData, setFormData] = useState({
@@ -147,7 +147,7 @@ const Admin = ({ isLoggedIn }) => {
   const nav = useNavigate();
 
   useEffect(() => {
-    if (!isLoggedIn) {
+    if (!loggedIn) {
       nav("/login");
     }
   }, []);
@@ -494,7 +494,8 @@ const Admin = ({ isLoggedIn }) => {
 };
 
 Admin.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired,
+  loggedIn: PropTypes.bool.isRequired,
+  logout: PropTypes.func.isRequired,
 };
 
 export default Admin;
