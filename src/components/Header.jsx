@@ -1,12 +1,38 @@
 import React, {useState} from "react";
 import FlightIcon from "../assets/FLIGHT HUB.png"
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
-const Header = () => {
+const Header = ({ loggedIn, logOut }) => {
   const [activeButton, setActiveButton] = useState("HOME");
 
   const handleButtonClick = (buttonName) => {
     setActiveButton(buttonName === activeButton ? null : buttonName);
+  };
+
+  // Function to check if a user is logged in or not.
+  const checkLogin = (loggedIn) => {
+    if (loggedIn === true) {
+      // If logged in display the user's name and a log out button.
+      return (
+        <div className="logged-in-wrapper text-base">
+          <div className="username">
+            <u>
+              Admin
+            </u>
+          </div>
+          <div>
+            <button className="logout-btn" onClick={logOut}>
+              Log Out
+            </button>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <button>Login</button>
+      )
+    }
   };
 
   return (
@@ -22,7 +48,7 @@ const Header = () => {
             </h2>
           </div>
         </div>
-        <div className="w-1/2">
+        <div className="w-3/4">
           <ul className="flex h-full w-full flex-row items-center justify-around text-3xl text-white text-opacity-70">
             <Link to="/">
             <button
@@ -81,23 +107,18 @@ const Header = () => {
             </Link>
             <li>|</li>
             <Link to="/login">
-            <button
-              onClick={() => handleButtonClick("LOGIN")}
-              style={{
-                color:
-                  activeButton === "LOGIN"
-                    ? "white"
-                    : "rgba(255, 255, 255, 0.63)",
-              }}
-            >
-              Login
-            </button>
+            <div>{checkLogin(loggedIn)}</div>
             </Link>
           </ul>
         </div>
       </div>
     </div>
   );
+};
+
+Header.propTypes = {
+  loggedIn: PropTypes.bool.isRequired,
+  logOut: PropTypes.func.isRequired,
 };
 
 export default Header;

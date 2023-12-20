@@ -1,18 +1,37 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 
-const Login = () => {
+const Login = ({ setLoggedIn, loggedIn }) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const nav = useNavigate();
+
+  const correctUsername = "admin";
+  const correctPassword = "admin";
+
+  const handleLogin = () => {
+    if (!(username === correctUsername)) {
+      alert("User doesn't exist");
+      return;
+    }
+    if (!(password === correctPassword)) {
+      alert("Passwords do not match records.");
+      return;
+    }
+    localStorage.setItem("loggedIn", "true");
+    setLoggedIn(true);
+    nav("/");
+  };
+
+  useEffect(() => {
+    if (localStorage.getItem("loggedIn") === "true") {
+      console.log(`Welcome back, ${correctUsername}!`);
+    }
+  }, [loggedIn]);
+
   return (
     <div>
-      {/* <div className="flex h-40 max-w-full justify-center bg-avion-blue">
-        <div className="flex w-full max-w-screen-lg flex-col">
-          <div className="h-1/2 w-1/2 items-center">
-            <div className="mt-6 flex flex-row justify-between">
-              <h1 className="text-4xl text-white">Admin Login</h1>
-            </div>
-          </div>
-        </div>
-      </div> */}
-
       <div className="flex justify-center font-Gupter">
         <div className="mb-6 mt-6 flex w-full max-w-screen-lg flex-col rounded bg-gray-300">
           <div className="h-1/2 w-1/2 items-center pl-5">
@@ -22,15 +41,28 @@ const Login = () => {
             <div className="p-5">
               <div className="flex p-2">
                 <h2 className="w-2/5">Username:</h2>
-                <input></input>
+                <input
+                  type="text"
+                  id="username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                ></input>
               </div>
               <div className="flex p-2">
                 <h2 className="w-2/5">Password:</h2>
-                <input type="password"></input>
+                <input
+                  type="password"
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                ></input>
               </div>
             </div>
             <div>
-              <button className="m-2 mb-8 w-48 rounded border border-black/50 bg-avion-blue p-2 text-white">
+              <button
+                className="m-2 mb-8 w-48 rounded border border-black/50 bg-avion-blue p-2 text-white"
+                onClick={handleLogin}
+              >
                 Login
               </button>
             </div>
@@ -41,4 +73,8 @@ const Login = () => {
   );
 };
 
+Login.propTypes = {
+  setLoggedIn: PropTypes.bool.isRequired,
+  loggedIn: PropTypes.bool.isRequired,
+};
 export default Login;

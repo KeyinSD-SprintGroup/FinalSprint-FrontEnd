@@ -1,7 +1,9 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 
-const Admin = () => {
+const Admin = ({ loggedIn }) => {
   const [activeButton, setActiveButton] = useState("Flight");
   const [activeEntity, setActiveEntity] = useState("Flight");
   const [formData, setFormData] = useState({
@@ -141,6 +143,14 @@ const Admin = () => {
     console.log("Flight data to be submitted:", flightData);
     putFlightData(flightData);
   };
+
+  const nav = useNavigate();
+
+  useEffect(() => {
+    if (!loggedIn) {
+      nav("/login");
+    }
+  }, []);
 
   return (
     <div>
@@ -481,6 +491,11 @@ const Admin = () => {
       </div>
     </div>
   );
+};
+
+Admin.propTypes = {
+  loggedIn: PropTypes.bool.isRequired,
+  logout: PropTypes.func.isRequired,
 };
 
 export default Admin;

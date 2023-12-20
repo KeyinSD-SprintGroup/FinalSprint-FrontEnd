@@ -76,10 +76,26 @@ function App() {
     fetchFlightData();
   }, [isArrival, airportName]);
 
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  // Check if user is logged in
+  useEffect(() => {
+    if (localStorage.getItem("isLoggedIn") === "true") {
+      console.log(`Welcome back, Admin!`);
+    }
+  }, [loggedIn]);
+
+  const logOut = () => {
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("userData");
+    setLoggedIn(false);
+    console.log("You have been logged out.");
+  };
+
   return (
     <Router>
       <div className="h-screen font-Koulen tracking-wider">
-        <Header />
+        <Header loggedIn={loggedIn} logOut={logOut}/>
         <Routes>
           <Route
             path="/"
@@ -106,9 +122,9 @@ function App() {
               />
             }
           ></Route>
-          <Route path="/admin" element={<Admin />}></Route>
+          <Route path="/admin" element={<Admin loggedIn={loggedIn}/>}></Route>
           <Route path="/contact" element={<Contact />}></Route>
-          <Route path="/login" element={<Login />}></Route>
+          <Route path="/login" element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>}></Route>
           <Route path="/admin" element={<Admin />}></Route>
         </Routes>
         <Footer />
