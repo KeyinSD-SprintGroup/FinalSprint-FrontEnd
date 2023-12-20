@@ -76,6 +76,8 @@ function App() {
     fetchFlightData();
   }, [isArrival, airportName]);
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
     <Router>
       <div className="h-screen font-Koulen tracking-wider">
@@ -106,7 +108,7 @@ function App() {
               />
             }
           ></Route>
-          <Route path="/admin" element={<Admin />}></Route>
+          <Route path="/admin" element={<Admin isLoggedIn={isLoggedIn}/>}></Route>
           <Route path="/contact" element={<Contact />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/admin" element={<Admin />}></Route>

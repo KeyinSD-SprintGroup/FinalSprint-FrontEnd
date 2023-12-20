@@ -1,5 +1,6 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Admin = () => {
   const [activeButton, setActiveButton] = useState("Flight");
@@ -141,6 +142,21 @@ const Admin = () => {
     console.log("Flight data to be submitted:", flightData);
     putFlightData(flightData);
   };
+
+  const nav = useNavigate();
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      nav("/login");
+    } else {
+      setIsLoggedIn(true);
+      nav("/admin");
+    }
+  }, []);
+
+  if (isLoggedIn) {
+    return null;
+  }
 
   return (
     <div>
