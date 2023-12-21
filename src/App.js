@@ -23,7 +23,9 @@ function App() {
   useEffect(() => {
     const fetchAirportData = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/airport`);
+        const response = await fetch(
+          `http://finalsprint-env.eba-asawbabm.us-east-1.elasticbeanstalk.com/airport`,
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch Airport data");
         }
@@ -55,9 +57,8 @@ function App() {
           : "departure_flight_view";
 
         const response = await fetch(
-          `http://localhost:8080/${endpoint}?${
+          `http://finalsprint-env.eba-asawbabm.us-east-1.elasticbeanstalk.com/${endpoint}?${
             isArrival ? "arrival" : "departure"
-
           }AirportName=${encodeURIComponent(airportName)}`,
         );
 
@@ -95,7 +96,7 @@ function App() {
   return (
     <Router>
       <div className="h-screen font-Koulen tracking-wider">
-        <Header loggedIn={loggedIn} logOut={logOut}/>
+        <Header loggedIn={loggedIn} logOut={logOut} />
         <Routes>
           <Route
             path="/"
@@ -122,9 +123,12 @@ function App() {
               />
             }
           ></Route>
-          <Route path="/admin" element={<Admin loggedIn={loggedIn}/>}></Route>
+          <Route path="/admin" element={<Admin loggedIn={loggedIn} />}></Route>
           <Route path="/contact" element={<Contact />}></Route>
-          <Route path="/login" element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>}></Route>
+          <Route
+            path="/login"
+            element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />}
+          ></Route>
           <Route path="/admin" element={<Admin />}></Route>
         </Routes>
         <Footer />

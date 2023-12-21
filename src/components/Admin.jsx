@@ -37,7 +37,7 @@ const Admin = ({ loggedIn }) => {
   const putPassengerData = async (data) => {
     try {
       const response = await axios.post(
-        "http://localhost:8080/passenger",
+        "http://finalsprint-env.eba-asawbabm.us-east-1.elasticbeanstalk.com/passenger",
         data,
         {
           headers: {
@@ -73,7 +73,7 @@ const Admin = ({ loggedIn }) => {
   const putAircraftData = async (data) => {
     try {
       const response = await axios.post(
-        "http://localhost:8080/aircraft",
+        "http://finalsprint-env.eba-asawbabm.us-east-1.elasticbeanstalk.com/aircraft",
         data,
         {
           headers: {
@@ -109,11 +109,15 @@ const Admin = ({ loggedIn }) => {
 
   const putFlightData = async (data) => {
     try {
-      const response = await axios.post("http://localhost:8080/flight", data, {
-        headers: {
-          "Content-Type": "application/json",
+      const response = await axios.post(
+        "http://finalsprint-env.eba-asawbabm.us-east-1.elasticbeanstalk.com/flight",
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
         },
-      });
+      );
 
       console.log("Server response:", response);
 
